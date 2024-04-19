@@ -8,33 +8,34 @@ import SwiftUI
 struct OnboardingView: View {
     @StateObject private var pathModel = PathModel()
     @StateObject private var onboardingViewModel = OnboardingViewModel()
+    @StateObject private var todoListViewModel = TodoListViewModel()
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
             OnboardingContentView(onboardingViewModel: onboardingViewModel)
+//            TodoListView()
+//                .environmentObject(todoListViewModel)
                 .navigationDestination(
                     for: PathType.self,
                     destination: {pathType in
                         switch pathType {
                         case .homeView:
                             HomeView()
-                                .navigationBarBackButtonHidden()
+//                                .navigationBarBackButtonHidden()
                             
                         case .todoView:
                             TodoView()
-                                .navigationBarBackButtonHidden()
+//                                .navigationBarBackButtonHidden()
                             
                         case .memoView:
                             MemoView()
-                                .navigationBarBackButtonHidden()
+//                                .navigationBarBackButtonHidden()
                         }
                     }
                 )
         }
         .environmentObject(pathModel)
     }
-      
-  
 }
 // MARK: - 온보딩 컨텐츠 뷰
 private struct OnboardingContentView: View {
@@ -63,7 +64,7 @@ private struct OnboardingCellListView: View {
     
     fileprivate init(
         onboardingViewModel: OnboardingViewModel,
-         selectedIndex: Int = 0
+        selectedIndex: Int = 0
     ) {
         self.onboardingViewModel = onboardingViewModel
         self.selectedIndex = selectedIndex
@@ -145,14 +146,14 @@ private struct StartBtnView: View {
                         .renderingMode(.template)
                         .foregroundColor(.customGreen)
                 }
-        }
+            }
         )
         .padding(.bottom, 50)
     }
 }
 
 struct OnboardingView_Previews: PreviewProvider {
-  static var previews: some View {
-    OnboardingView()
-  }
+    static var previews: some View {
+        OnboardingView()
+    }
 }
