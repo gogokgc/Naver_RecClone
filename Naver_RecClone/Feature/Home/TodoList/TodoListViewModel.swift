@@ -69,7 +69,7 @@ extension TodoListViewModel {
         }
     }
     
-    func romoveBtnTapped() {
+    func removeBtnTapped() {
         todos.removeAll { todo in
             removeTodos.contains(todo)
         }

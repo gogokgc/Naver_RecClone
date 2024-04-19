@@ -29,6 +29,9 @@ struct TodoListView: View {
                 TitleView()
                     .padding(.top, 30)
                 
+                    .onAppear {
+                        print(todoListViewModel.todos.isEmpty)
+                    }
                 if todoListViewModel.todos.isEmpty {
                     AnnouncementView()
                 } else {
@@ -45,10 +48,9 @@ struct TodoListView: View {
             isPresented: $todoListViewModel.isDisplayRemoveTodoAlert
         ) {
             Button("삭제", role: .destructive) {
-                todoListViewModel.romoveBtnTapped()
+                todoListViewModel.removeBtnTapped()
             }
             Button("취소", role: .cancel) {
-                
             }
         }
     }
@@ -134,33 +136,28 @@ private struct TodoCellView: View {
     private var todo: Todo
     
     fileprivate init(
-//        todoListViewModel: TodoListViewModel,
         isRemoveSelected: Bool = false,
         todo: Todo
     ) {
-            //        self.todoListViewModel = todoListViewModel
-            //        self.isRemoveSelected = isRemoveSelected
-            _isRemoveSelected = State(initialValue: isRemoveSelected)
-            self.todo = todo
-        }
+        _isRemoveSelected = State(initialValue: isRemoveSelected)
+        self.todo = todo
+    }
     
     fileprivate var body: some View {
         VStack(spacing: 20) {
             HStack {
                 if !todoListViewModel.isEditTodoMode {
                     Button(
-                        action: {
-                            todoListViewModel.selectedBoxTapped(todo)
-                        },
-                        label: {
-                            todo.selected ? Image("selectedBox") : Image("unSelectedBox")
-                        })
+                        action: { todoListViewModel.selectedBoxTapped(todo) },
+                        label: { todo.selected ? Image("selectedBox") : Image("unSelectedBox") }
+                    )
                 }
                 
                 VStack(alignment: .leading, spacing: 5) {
                     Text(todo.title)
                         .font(.system(size: 16))
                         .foregroundColor(todo.selected ? .customIconGray : .customBlack)
+                        .strikethrough(todo.selected)
                     
                     Text(todo.convertedDayAndTime)
                         .font(.system(size: 16))
@@ -207,7 +204,7 @@ private struct WriteTodoBtnView: View {
                     },
                     label: {
                         Image("writeBtn")
-                })
+                    })
             }
         }
     }

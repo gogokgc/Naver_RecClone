@@ -18,8 +18,7 @@ struct CustomNavigationBar: View {
         leftBtnAction: @escaping () -> Void = {},
         rightBtnAction: @escaping () -> Void = {},
         rightBtnType: NavigationBtnType = .edit
-    )
-    {
+    ) {
         self.isDisplayLeftBtn = isDisplayLeftBtn
         self.isDisplayRightBtn = isDisplayRightBtn
         self.leftBtnAction = leftBtnAction
@@ -31,17 +30,16 @@ struct CustomNavigationBar: View {
         HStack {
             if isDisplayLeftBtn {
                 Button(
-                    action: rightBtnAction,
-                    label: {
-                        Image("leftArrow")
-                    })
+                    action: leftBtnAction,
+                    label: { Image("leftArrow") }
+                )
             }
             
             Spacer()
             
             if isDisplayRightBtn {
                 Button(
-                    action: leftBtnAction,
+                    action: rightBtnAction,
                     label: {
                         if rightBtnType == .close {
                             Image("close")
@@ -49,7 +47,8 @@ struct CustomNavigationBar: View {
                             Text(rightBtnType.rawValue)
                                 .foregroundColor(.customBlack)
                         }
-                    })
+                    }
+                )
             }
         }
         .padding(.horizontal, 20)
