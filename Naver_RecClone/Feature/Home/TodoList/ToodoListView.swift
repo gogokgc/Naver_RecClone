@@ -29,9 +29,6 @@ struct TodoListView: View {
                 TitleView()
                     .padding(.top, 30)
                 
-                    .onAppear {
-                        print(todoListViewModel.todos.isEmpty)
-                    }
                 if todoListViewModel.todos.isEmpty {
                     AnnouncementView()
                 } else {

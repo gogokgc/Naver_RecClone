@@ -17,7 +17,6 @@ struct TodoView: View {
                     pathModel.paths.removeLast()
                 },
                 rightBtnAction: {
-                    print("\(todoViewModel.title) - \(todoViewModel.time) = \(todoViewModel.day)")
                     todoListViewModel.addTodo(
                         .init(
                             title: todoViewModel.title,
