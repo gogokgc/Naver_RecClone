@@ -10,8 +10,8 @@ import AVFoundation
 // AVAudioPlayerDelegate 런타임 매커니즘이 NSObject 를 기반으로 사용하여 같이 상속해주어 간편하게 사용할수있게 해준다
 class VoiceRecorderViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isDisplayRemoveVoiceRecorderAlert: Bool
-    @Published var isDisplayErrorAlert: Bool
-    @Published var errorAlertMessage: String
+    @Published var isDisplayAlert: Bool
+    @Published var alertMessage: String
     
     // 음성메모녹음관련 프로퍼티
     var audioRecorder: AVAudioRecorder?
@@ -30,7 +30,7 @@ class VoiceRecorderViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate 
     // 현재 선택된 음성메모 파일
     @Published var selectedRecoredFile: URL?
     
-    init(
+     init(
         isDisplayRemoveVoiceRecorderAlert: Bool = false,
         isDisplayErrorAlert: Bool = false,
         errorAlertMessage: String = "",
@@ -45,8 +45,8 @@ class VoiceRecorderViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate 
         selectedRecoredFile: URL? = nil
     ) {
         self.isDisplayRemoveVoiceRecorderAlert = isDisplayRemoveVoiceRecorderAlert
-        self.isDisplayErrorAlert = isDisplayErrorAlert
-        self.errorAlertMessage = errorAlertMessage
+        self.isDisplayAlert = isDisplayErrorAlert
+        self.alertMessage = errorAlertMessage
         //        self.audioRecoder = audioRecoder
         self.isRecording = isRecording
         //        self.audioPlayer = audioPlayer
@@ -72,7 +72,7 @@ extension VoiceRecorderViewModel {
         
     }
     
-    func removeSeletedVoiceRecord() {
+    func removeSelectedVoiceRecord() {
         guard let fileToRemove = selectedRecoredFile,
               let indexToRemove = recordedFiles.firstIndex(of: fileToRemove) else {
             displayAlert(message: "선택된 음성메모 파일을 찾을수 없습니다.")
@@ -99,11 +99,11 @@ extension VoiceRecorderViewModel {
     }
     
     private func setErrorAlertMessage(_ message: String) {
-        errorAlertMessage = message
+        alertMessage = message
     }
     
     private func setIsDisplayErrorAlert(_ isDisplay: Bool) {
-        isDisplayErrorAlert = isDisplay
+        isDisplayAlert = isDisplay
     }
     
     private func displayAlert(message: String) {
