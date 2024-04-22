@@ -141,7 +141,7 @@ private struct MemoCellView: View {
     fileprivate var body: some View {
         Button(
             action: {
-                // TODO: - path 관련 메모 구현 후 구현 필요
+                pathModel.paths.append(.memoView(isCreateMode: false, memo: memo))
             }, label: {
                 VStack(spacing: 10) {
                     HStack {
@@ -163,8 +163,8 @@ private struct MemoCellView: View {
                                     isRemoveSelected.toggle()
                                     memoListViewModel.memoReoveSelectedBoxTapped(memo)
                                 }, label: {
-                                    isRemoveSelected ? Image("seletedBox") : Image("unSelectedBox")
-                            })
+                                    isRemoveSelected ? Image("selectedBox") : Image("unSelectedBox")
+                                })
                         }
                     }
                     .padding(.horizontal, 30)
@@ -191,10 +191,10 @@ private struct writeMemoBtnView: View {
                 
                 Button(
                     action: {
-                        
+                        pathModel.paths.append(.memoView(isCreateMode: true, memo: nil))
                     }, label: {
                         Image("writeBtn")
-                })
+                    })
             }
         }
     }
