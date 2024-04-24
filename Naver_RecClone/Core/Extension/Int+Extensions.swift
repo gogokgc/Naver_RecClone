@@ -8,9 +8,9 @@ import Foundation
 extension Int {
     var formattedTimeString: String {
         let time = Time.fromSeconds(self)
-        let hoursString = String(format: "0%2d", time.hours)
-        let minutesString = String(format: "0%2d", time.minutes)
-        let secondsString = String(format: "0%2d", time.seconds)
+        let hoursString = String(format: "%02d", time.hours)
+        let minutesString = String(format: "%02d", time.minutes)
+        let secondsString = String(format: "%02d", time.seconds)
         
         return "\(hoursString) : \(minutesString) : \(secondsString)"
     }
