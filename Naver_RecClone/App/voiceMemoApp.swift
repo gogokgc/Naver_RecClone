@@ -7,9 +7,11 @@ import SwiftUI
 
 @main
 struct voiceMemoApp: App {
-  var body: some Scene {
-    WindowGroup {
-      OnboardingView()
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    var body: some Scene {
+        WindowGroup {
+            OnboardingView()
+        }
     }
-  }
 }
