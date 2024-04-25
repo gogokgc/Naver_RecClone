@@ -30,30 +30,24 @@ class VoiceRecorderViewModel: NSObject, ObservableObject, AVAudioPlayerDelegate 
     // 현재 선택된 음성메모 파일
     @Published var selectedRecoredFile: URL?
     
-     init(
+    init(
         isDisplayRemoveVoiceRecorderAlert: Bool = false,
         isDisplayErrorAlert: Bool = false,
         errorAlertMessage: String = "",
-        //        audioRecoder: AVAudioRecorder? = nil,
         isRecording: Bool = false,
-        //        audioPlayer: AVAudioPlayer? = nil,
         isPlaying: Bool = false,
         isPaused: Bool = false,
         playedTime: TimeInterval = 0,
-        //        progressTimer: Timer,
         recordedFiles: [URL] = [],
         selectedRecoredFile: URL? = nil
     ) {
         self.isDisplayRemoveVoiceRecorderAlert = isDisplayRemoveVoiceRecorderAlert
         self.isDisplayAlert = isDisplayErrorAlert
         self.alertMessage = errorAlertMessage
-        //        self.audioRecoder = audioRecoder
         self.isRecording = isRecording
-        //        self.audioPlayer = audioPlayer
         self.isPlaying = isPlaying
         self.isPaused = isPaused
         self.playedTime = playedTime
-        //        self.progressTimer = progressTimeer
         self.recordedFiles = recordedFiles
         self.selectedRecoredFile = selectedRecoredFile
     }

@@ -8,6 +8,7 @@ import SwiftUI
 struct TodoListView: View {
     @EnvironmentObject private var pathModel: PathModel
     @EnvironmentObject private var todoListViewModel: TodoListViewModel
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     
     var body: some View {
         ZStack {
@@ -50,6 +51,12 @@ struct TodoListView: View {
             Button("취소", role: .cancel) {
             }
         }
+        .onChange(
+            of: todoListViewModel.todos,
+            perform: { todos in
+                homeViewModel.setTodosCount(todos.count)
+            }
+        )
     }
     
     //변수나 메소드를 통해 하위뷰를 구성하면 선언된 변수를 공유해 쓰기 편함, 주로 해당 뷰에서서만 사용되는 하위뷰일 경우 이런 방식으로 사용
