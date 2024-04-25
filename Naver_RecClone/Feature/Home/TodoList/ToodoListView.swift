@@ -11,7 +11,7 @@ struct TodoListView: View {
     @EnvironmentObject private var homeViewModel: HomeViewModel
     
     var body: some View {
-        ZStack {
+//        ZStack {
             //todo Cell List
             VStack {
                 if !todoListViewModel.todos.isEmpty {
@@ -37,10 +37,14 @@ struct TodoListView: View {
                         .padding(.top, 20)
                 }
             }
-            WriteTodoBtnView()
-                .padding(.trailing, 20)
-                .padding(.bottom, 50)
-        }
+//            .modifier(WriteBtnViewModifier(action: { pathModel.paths.append(.todoView)}))
+//            WriteTodoBtnView()
+//                .padding(.trailing, 20)
+//                .padding(.bottom, 50)
+//        }
+            .writeBtn(perform: {
+                pathModel.paths.append(.todoView)
+            })
         .alert(
             "To do lst \(todoListViewModel.removeTodosCount)개 삭제하시겠습니까?",
             isPresented: $todoListViewModel.isDisplayRemoveTodoAlert
