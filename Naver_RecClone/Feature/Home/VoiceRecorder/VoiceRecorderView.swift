@@ -314,10 +314,10 @@ private struct RecordBtnView: View {
                     label: {
                         if voiceRecorderViewModel.isRecording {
                             Image("mic_recording")
-                                .scaleEffect(isAnimation ? 1.5 : 1)
+                                .scaleEffect(isAnimation ? 1.5 : 1) // 크기 변경 효과
                                 .onAppear {
-                                    withAnimation(.spring().repeatForever()) {
-                                        isAnimation.toggle()
+                                    withAnimation(.spring().repeatForever()) { // 스프링 효과 유효기간 계속
+                                        isAnimation.toggle() // 토글 작업이 반복되도록
                                     }
                                 }
                                 .onDisappear {
